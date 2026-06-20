@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORLUN | Игровой блог, гайды по стримингу и контенту</title>
-    <meta name="description" content="Полезные гайды для начинающих стримеров: настройка OBS, фишки продвижения в ТикТок и игровой контент. Заходи на стримы!">
+    <title>VORLUN | Гайды по стримингу, настройке ОБС и продвижению</title>
+    <meta name="description" content="Полезные SEO-гайды для начинающих контент-мейкеров. Как настроить OBS без лагов, убрать шумы микрофона и продвигать Twitch через TikTok.">
     <style>
-        /* Основные геймерские цвета */
         :root {
             --bg-color: #0b0a10;
             --panel-bg: #14121f;
@@ -34,7 +33,9 @@
             min-height: 100vh;
         }
 
-        /* Шапка сайта */
+        /* МЕСТО ДЛЯ ТВОЕЙ АНАЛИТИКИ (Гугл / Яндекс) */
+        /* Сюда в будущем можно будет вставить скрипт счетчика */
+
         header {
             background-color: var(--panel-bg);
             width: 100%;
@@ -63,11 +64,14 @@
             text-transform: uppercase;
             color: var(--text-main);
             text-decoration: none;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            font-family: inherit;
         }
 
-        .logo span {
-            color: var(--primary);
-        }
+        .logo span { color: var(--primary); }
 
         nav button {
             background: none;
@@ -82,18 +86,11 @@
             padding: 5px 0;
         }
 
-        nav button:hover, nav button.active {
-            color: var(--primary);
-        }
+        nav button:hover, nav button.active { color: var(--primary); }
 
         @media (max-width: 600px) {
-            .header-container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            nav button {
-                margin: 0 10px;
-            }
+            .header-container { flex-direction: column; gap: 15px; }
+            nav button { margin: 0 10px; }
         }
 
         .container {
@@ -103,13 +100,8 @@
             flex: 1;
         }
 
-        /* Управление видимостью страниц */
-        .page {
-            display: none;
-        }
-        .page.active-page {
-            display: block;
-        }
+        .page { display: none; }
+        .page.active-page { display: block; }
 
         .section {
             background-color: var(--panel-bg);
@@ -136,9 +128,7 @@
             margin-top: 25px;
         }
 
-        @media (max-width: 600px) {
-            .links-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 600px) { .links-grid { grid-template-columns: 1fr; } }
 
         .btn {
             display: flex;
@@ -150,30 +140,40 @@
             font-weight: 600;
             font-size: 1.05rem;
             transition: all 0.25s ease;
-            box-sizing: border-box;
         }
 
-        .btn-twitch { 
-            background-color: var(--twitch-color); 
-            color: #ffffff;
-        }
-        .btn-twitch:hover { 
-            background-color: var(--twitch-hover);
-            transform: translateY(-2px);
+        .btn-twitch { background-color: var(--twitch-color); color: #ffffff; }
+        .btn-twitch:hover { background-color: var(--twitch-hover); transform: translateY(-2px); }
+
+        .btn-tiktok { background-color: var(--tiktok-color); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.15); }
+        .btn-tiktok:hover { border-color: var(--tiktok-border); background-color: #191724; transform: translateY(-2px); }
+
+        /* ЭЛЕМЕНТЫ КАТАЛОГА СТАТЕЙ */
+        .catalog-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
-        .btn-tiktok { 
-            background-color: var(--tiktok-color); 
-            color: #ffffff; 
-            border: 1px solid rgba(255, 255, 255, 0.15);
-        }
-        .btn-tiktok:hover { 
-            border-color: var(--tiktok-border);
-            background-color: #191724;
-            transform: translateY(-2px);
+        .tag-filter {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
         }
 
-        /* Карточка статьи на главной */
+        .tag-filter:hover, .tag-filter.active-tag {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
         .post-card {
             background-color: var(--card-bg);
             padding: 22px;
@@ -189,55 +189,28 @@
             border-color: rgba(127, 90, 240, 0.3);
         }
 
-        .post-card h3 {
-            margin: 0 0 12px 0;
-            color: var(--text-main);
-            font-size: 1.25rem;
-        }
-
-        .post-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin: 0 0 18px 0;
-        }
-
-        .post-link {
-            color: var(--primary);
+        .post-card h3 { margin: 0 0 10px 0; color: var(--text-main); font-size: 1.25rem; }
+        .post-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0 0 15px 0; }
+        
+        .article-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.8rem;
+            color: var(--secondary);
             font-weight: bold;
-            font-size: 0.95rem;
-        }
-
-        /* Стили для страницы самой статьи (Гайда) */
-        .article-content {
-            line-height: 1.7;
-            font-size: 1.05rem;
-            color: #e1e6eb;
-        }
-
-        .article-content h3 {
-            color: var(--text-main);
-            margin-top: 30px;
-            font-size: 1.3rem;
-        }
-
-        .article-content hr {
-            border: 0;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin: 25px 0;
-        }
-
-        .article-content ul {
-            padding-left: 20px;
-            margin: 15px 0;
-        }
-
-        .article-content li {
+            text-transform: uppercase;
             margin-bottom: 8px;
         }
 
-        /* Красивые блоки для важных советов */
+        .post-link { color: var(--primary); font-weight: bold; font-size: 0.95rem; }
+
+        /* Оформление контента статей */
+        .article-content { line-height: 1.7; font-size: 1.05rem; color: #e1e6eb; }
+        .article-content h3 { color: var(--text-main); margin-top: 30px; font-size: 1.3rem; }
+        .article-content hr { border: 0; height: 1px; background: rgba(255, 255, 255, 0.1); margin: 25px 0; }
+        .article-content ul, .article-content ol { padding-left: 20px; margin: 15px 0; }
+        .article-content li { margin-bottom: 8px; }
+        
         .tip-box {
             background-color: var(--card-bg);
             border-left: 4px solid var(--primary);
@@ -246,16 +219,29 @@
             margin: 20px 0;
             color: var(--text-main);
         }
+
+        .back-btn {
+            background: none;
+            border: 1px solid var(--text-muted);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 25px;
+            transition: all 0.2s;
+        }
+        .back-btn:hover { border-color: var(--primary); color: var(--primary); }
     </style>
 </head>
 <body>
 
     <header>
         <div class="header-container">
-            <button onclick="showPage('main')" class="logo" style="background:none; border:none; padding:0; font-family:inherit;">VORLUN<span>_</span></button>
+            <button onclick="showPage('main')" class="logo">VORLUN<span>_</span></button>
             <nav>
                 <button id="nav-main" class="active" onclick="showPage('main')">Главная</button>
-                <button id="nav-guides" onclick="showPage('guides')">Гайды</button>
+                <button id="nav-catalog" onclick="showPage('catalog')">Каталог гайдов</button>
             </nav>
         </div>
     </header>
@@ -272,62 +258,128 @@
             </div>
 
             <div class="section">
-                <h2>📚 Полезные Гайды</h2>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">Последние публикации для стримеров и контент-мейкеров:</p>
+                <h2>🔥 Новое в блоге</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Свежие материалы для развития твоих каналов:</p>
                 
-                <div class="post-card" onclick="showPage('guides')">
+                <div class="post-card" onclick="openArticle('obs-guide')">
+                    <div class="article-meta"><span>#OBS</span> <span>2026</span></div>
                     <h3>Как настроить OBS для стрима без лагов в 2026 году</h3>
-                    <p>Пошаговый разбор настроек кодировщика, битрейта и приоритета процесса. Как сделать картинку сочной, даже если у тебя не самый мощный ПК.</p>
-                    <span class="post-link">Читать инструкцию →</span>
+                    <p>Пошаговый разбор настроек кодировщика, битрейта и приоритетов. Оптимизируем картинку для слабых и средних ПК.</p>
+                    <span class="post-link">Читать →</span>
                 </div>
             </div>
         </div>
 
-        <div id="page-guides" class="page">
+        <div id="page-catalog" class="page">
             <div class="section">
-                <h1 style="font-size: 2rem; margin-top: 0; margin-bottom: 20px; line-height: 1.3;">Как настроить OBS для стрима без лагов в 2026 году</h1>
+                <h2>📚 Все публикации</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">Выбирай категорию, чтобы отфильтровать гайды:</p>
                 
-                <div class="article-content">
-                    <p>Каждый начинающий стример сталкивается с одной и той же проблемой: запускаешь трансляцию, а в игре начинается слайд-шоу, или зрители в чате жалуются на постоянные фризы. В этом пошаговом руководстве мы разберем, как настроить ОБС для стрима так, чтобы картинка оставалась плавной и сочной даже на среднем железе.</p>
-                    
-                    <hr>
-                    
-                    <h3>1. Запуск от имени администратора (Самый важный фикс)</h3>
-                    <p>Перед тем как лезть в технические параметры, сделай то, о чем забывают 90% новичков.</p>
-                    
-                    <div class="tip-box">
-                        <strong>Инструкция:</strong> Нажми правой кнопкой мыши по ярлыку OBS Studio ➡️ <em>Свойства</em> ➡️ <em>Совместимость</em> ➡️ Поставь галочку <strong>«Запускать эту программу от имени администратора»</strong>.
+                <div class="catalog-tags">
+                    <button class="tag-filter active-tag" onclick="filterCatalog('all')">Все темы</button>
+                    <button class="tag-filter" onclick="filterCatalog('obs')"> Настройка OBS</button>
+                    <button class="tag-filter" onclick="filterCatalog('audio')"> Настройка Звука</button>
+                    <button class="tag-filter" onclick="filterCatalog('tiktok')"> Продвижение TikTok</button>
+                </div>
+
+                <div id="catalog-list">
+                    <div class="post-card mix-art obs" onclick="openArticle('obs-guide')">
+                        <div class="article-meta"><span>#OBS</span></div>
+                        <h3>Как настроить OBS для стрима без лагов в 2026 году</h3>
+                        <p>Оптимальный битрейт, выбор кодировщика NVENC и секретные фишки Windows для повышения плавности стрима.</p>
+                        <span class="post-link">Читать гайд →</span>
                     </div>
-                    
-                    <p>Windows автоматически выделяет приоритет видеокарты под игру, обделяя OBS ресурсами. Запуск от админа заставляет систему делить ресурсы поровну, что мгновенно решает проблему пропущенных кадров из-за задержки рендеринга.</p>
-                    
-                    <h3>2. Оптимальные настройки кодировщика OBS</h3>
-                    <p>Заходим в <strong>Настройки ➡️ Вывод</strong>. Переключаем «Режим вывода» на <strong>Расширенный</strong> и идем во вкладку «Потоковое вещание».</p>
-                    
+
+                    <div class="post-card mix-art audio" onclick="openArticle('audio-guide')">
+                        <div class="article-meta"><span>#Звук</span></div>
+                        <h3>Настройка микрофона в OBS: как убрать шумы, клики и гул</h3>
+                        <p>Пошаговая настройка фильтров: Шумоподавление, Пропускной порог шума и Лимитер. Делаем студийный звук бесплатно.</p>
+                        <span class="post-link">Читать гайд →</span>
+                    </div>
+
+                    <div class="post-card mix-art tiktok" onclick="openArticle('tiktok-guide')">
+                        <div class="article-meta"><span>#Тренды / TikTok</span></div>
+                        <h3>Продвижение стримов через TikTok: алгоритмы 2026 года</h3>
+                        <p>Как правильно резать стримы на клипы, какие хэштеги работают и как заставить алгоритмы ТикТока гнать трафик на Твич.</p>
+                        <span class="post-link">Читать гайд →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-obs-guide" class="page">
+            <button class="back-btn" onclick="showPage('catalog')">← Назад в каталог</button>
+            <div class="section">
+                <h1 style="font-size: 2rem; margin-top: 0;">Как настроить OBS для стрима без лагов в 2026 году</h1>
+                <div class="article-content">
+                    <p>Каждый начинающий стример сталкивается с одной и той же проблемой: лаги на трансляции при нормальном FPS в игре. Разберем базовый чеклист настройки ОБС.</p>
+                    <hr>
+                    <h3>1. Запуск от имени администратора</h3>
+                    <div class="tip-box">
+                        <strong>Фикс:</strong> ПКМ по ярлыку OBS ➡️ Свойства ➡️ Совместимость ➡️ Запускать от имени администратора. Это дает OBS приоритет на видеокарту.
+                    </div>
+                    <h3>2. Настройки кодировщика</h3>
                     <ul>
-                        <li><strong>Кодировщик (Encoder):</strong> Если у тебя видеокарта от NVIDIA, обязательно выбирай <strong>NVIDIA NVENC H.264</strong> (или AV1, если у тебя новая карта RTX 40-й серии). Процессор (x264) нагружать не нужно — оставь его для игры.</li>
-                        <li><strong>Управление битрейтом:</strong> Только <strong>CBR</strong> (постоянный битрейт).</li>
-                        <li><strong>Лучший битрейт для Твича:</strong> Для разрешения 1080p (60 FPS) золотой стандарт Twitch — <strong>6000 Kbps</strong>. Если интернет слабый, ставь 720p (60 FPS) и битрейт 4500 Kbps.</li>
-                        <li><strong>Предустановка (Preset):</strong> Выбирай <strong>P4 или P5 (Медленно / Хорошее качество)</strong>. Ставить P6 или P7 нет смысла — они сжигают ресурсы карты, а разницу в качестве не разглядишь.</li>
-                        <li><strong>Профиль (Profile):</strong> high.</li>
-                        <li><strong>Макс. кол-во b-кадров:</strong> 2.</li>
+                        <li><strong>Кодировщик:</strong> NVIDIA NVENC H.264 (или AV1 для RTX 40).</li>
+                        <li><strong>Битрейт для Twitch:</strong> 6000 Kbps для стабильных 1080p/60fps. Если лагает — снижай до 4500 Kbps (720p/60fps).</li>
+                        <li><strong>Управление:</strong> CBR (Постоянный битрейт).</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-audio-guide" class="page">
+            <button class="back-btn" onclick="showPage('catalog')">← Назад в каталог</button>
+            <div class="section">
+                <h1 style="font-size: 2rem; margin-top: 0;">Настройка микрофона в OBS: убираем шумы и клики клавиатуры</h1>
+                <div class="article-content">
+                    <p>Даже идеальная картинка не спасет стрим, если у тебя фонит микрофон, слышны вздохи или громкий стук механической клавиатуры. Нам не нужно покупать дорогую карту, все настроим встроенными фильтрами ОБС.</p>
+                    <hr>
+                    <h3>Пошаговый софт-апгрейд звука:</h3>
+                    <p>В панели «Микшер аудио» нажми на три точки рядом с микрофоном ➡️ <strong>Фильтры</strong>. Добавляй их строго в этом порядке:</p>
                     
-                    <h3>3. Настройки видео: Разрешение и FPS</h3>
-                    <p>Переходим во вкладку <strong>Видео</strong>.</p>
-                    <ol>
-                        <li><strong>Базовое (основа) разрешение:</strong> Это разрешение твоего монитора (например, 1920x1080).</li>
-                        <li><strong>Выходное (масштабированное) разрешение:</strong> То, что увидят зрители. Для снижения нагрузки можно поставить 1280x720.</li>
-                        <li><strong>Общие значения FPS:</strong> Ставь <strong>60</strong> для динамичных игр.</li>
-                    </ol>
+                    <h3>1. Шумоподавление (Noise Suppression)</h3>
+                    <p>Убирает постоянный фоновый гул (шум вентиляторов ПК, кондиционера). Выбирай метод <strong>RNNoise (хорошее качество)</strong>. Он отлично чистит звук и почти не ест ресурсы процессора.</p>
                     
-                    <h3>Что делать, если лаги все равно остались?</h3>
-                    <p>Если после всех манипуляций стрим все равно подлагивает, проверь эти три момента:</p>
+                    <h3>2. Пропускной порог шума (Noise Gate)</h3>
+                    <p>Этот фильтр полностью выключает микрофон, когда ты молчишь. Клавиатура и мышка больше не будут раздражать зрителей.</p>
                     <ul>
-                        <li><strong>Включи «Игровой режим» в Windows:</strong> В поиске системы вбей «Режим игры» и активируй его.</li>
-                        <li><strong>Ограничь FPS в самой игре:</strong> Поставь лимит кадров в настройках игры под герцовку монитора (например, 144 FPS), чтобы оставить видеокарте «воздух» для работы с OBS.</li>
-                        <li><strong>Проверь скорость интернета:</strong> Твой Upload (скорость отдачи) должен быть стабильно от 12-15 Мбит/с.</li>
+                        <li><strong>Порог закрытия:</strong> Ставь примерно на -32 дБ.</li>
+                        <li><strong>Порог открытия:</strong> Настрой на -26 дБ. Микрофон будет включаться только тогда, когда ты начинаешь говорить.</li>
                     </ul>
+
+                    <div class="tip-box">
+                        <strong>Важно:</strong> Потестируй пороги в наушниках, чтобы фильтр не откусывал первые буквы твоих слов. Если буквы пропадают — немного опусти ползунки влево.
+                    </div>
+
+                    <h3>3. Лимитер (Limiter)</h3>
+                    <p>Главный спаситель ушей твоих зрителей при скримерах или громком смехе. Лимитер просто не дает звуку подняться выше заданной планки.</p>
+                    <p>Поставь <strong>Порог срабатывания (Threshold) на -3.0 дБ</strong>. Теперь, как бы громко ты ни закричал, звук никогда не уйдет в жесткий перегруз.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-tiktok-guide" class="page">
+            <button class="back-btn" onclick="showPage('catalog')">← Назад в каталог</button>
+            <div class="section">
+                <h1 style="font-size: 2rem; margin-top: 0;">Продвижение стримов через TikTok: алгоритмы 2026 года</h1>
+                <div class="article-content">
+                    <p>Просто стримить на Твиче в пустоту — это главная ошибка новичков. Внутреннего поиска на Твиче почти нет. Твой главный локомотив продвижения — это короткие ролики в ТикТок, которые подхватывают алгоритмы рекомендаций.</p>
+                    <hr>
+                    <h3>💎 Стратегия перегона трафика на Twitch:</h3>
+                    
+                    <h3>1. Правило первых 3-х секунд</h3>
+                    <p>Алгоритмы ТикТока оценивают удержание. В самом начале ролика должен быть жесткий хук (крючок). Не начинай с «Всем привет, я стример», начинай сразу с экшена, смешного фейла или интригующего вопроса.</p>
+                    
+                    <h3>2. Оформление игрового контента</h3>
+                    <p>Используй формат разделенного экрана: сверху твое лицо с веб-камеры (крупно), снизу — сам геймплей. Текст-субтитры по центру экрана повышают досмотры ролика на 40%, так как многие листают ленту без звука.</p>
+
+                    <div class="tip-box">
+                        <strong>SEO Фишка для ТТ:</strong> Вбивай в поиск ТикТока тему твоей игры и смотри, какие ключевые фразы высвечиваются в подсказках. Пиши эти фразы текстом прямо на видео и в описание. Алгоритмы считывают этот текст для точного подбора аудитории.
+                    </div>
+
+                    <h3>3. Как призывать перейти на стрим?</h3>
+                    <p>Никогда не пиши «ссылка в шапке» в каждом ролике — алгоритмы могут занижать охваты за увод людей с платформы. Лучше делай упор на интерактив: <em>«Разбираем этот билд каждый день вживую, ник на фиолетовой платформе в профиле»</em>.</p>
                 </div>
             </div>
         </div>
@@ -335,25 +387,41 @@
     </div>
 
     <script>
+        // Функция переключения страниц меню
         function showPage(pageId) {
-            // Скрываем все страницы
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active-page');
-            });
-            // Убираем активный класс у кнопок меню
-            document.querySelectorAll('nav button').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
             
-            // Показываем нужную страницу
             document.getElementById('page-' + pageId).classList.add('active-page');
-            // Подсвечиваем кнопку в меню
-            document.getElementById('nav-' + pageId).classList.add('active');
+            const navBtn = document.getElementById('nav-' + pageId);
+            if(navBtn) navBtn.classList.add('active');
             
-            // Прокручиваем наверх страницы
             window.scrollTo(0, 0);
         }
-    </script>
 
+        // Функция открытия конкретной статьи
+        function openArticle(articlePageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active-page'));
+            document.getElementById('page-' + articlePageId).classList.add('active-page');
+            window.scrollTo(0, 0);
+        }
+
+        // Функция фильтрации в каталоге
+        function filterCatalog(category) {
+            // Подсветка кнопок фильтров
+            document.querySelectorAll('.tag-filter').forEach(btn => btn.classList.remove('active-tag'));
+            event.target.classList.add('active-tag');
+
+            // Фильтрация карточек
+            const cards = document.querySelectorAll('.mix-art');
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
